@@ -55,7 +55,8 @@ def move():
 
     square(food.x, food.y, 9, 'green')
     update()
-    ontimer(move, 49)
+    ontimer(move, 49)#Serpiente mas rapida
+    
 
 
 setup(420, 420, 370, 0)
