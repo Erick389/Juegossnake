@@ -55,7 +55,7 @@ def move():
 
     square(food.x, food.y, 9, 'green')
     update()
-    ontimer(move, 50)
+    ontimer(move, 49)
 
 
 setup(420, 420, 370, 0)
