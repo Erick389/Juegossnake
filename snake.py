@@ -1,16 +1,5 @@
-"""Snake, classic arcade game.
-
-Exercises
-
-1. How do you make the snake faster or slower?
-2. How can you make the snake go around the edges?
-3. How would you move the food?
-4. Change the snake to respond to mouse clicks.
-"""
-
-from random import randrange
+from random import random, randrange, choice
 from turtle import *
-
 from freegames import square, vector
 
 food = vector(0, 0)
@@ -22,7 +11,6 @@ a = choice(colores)
 colores.remove(a)
 foodcolor = choice(colores)
 snakecolor = choice(colores)
-
 
 def change(x, y):
     """Change snake direction."""
@@ -39,6 +27,7 @@ def move():
     """Move snake forward one segment."""
     head = snake[-1].copy()
     head.move(aim)
+    global food
 
     if not inside(head) or head in snake:
         square(head.x, head.y, 9, 'red')
@@ -49,20 +38,26 @@ def move():
 
     if head == food:
         print('Snake:', len(snake))
-        food.x = randrange(-20, 20) * 10
-        food.y = randrange(-20, 20) * 10
+        food.x = randrange(-15, 15) * 10
+        food.y = randrange(-15, 15) * 10
     else:
         snake.pop(0)
 
     clear()
 
     for body in snake:
-        square(body.x, body.y, 9, 'black')
+        square(body.x, body.y, 9, snakecolor)
+    opcion = [vector(10, 0), vector(-10, 0), vector(0, -10), vector(0, 10)]
+    plan = choice(opcion)
+    if randrange(10)==0:
+        if inside(food + plan):
+            food += plan
 
-    square(food.x, food.y, 9, 'green')
+
+
+    square(food.x, food.y, 9, foodcolor)
     update()
-    ontimer(move, 49)#Serpiente mas rapida
-    
+    ontimer(move, 60)
 
 
 setup(420, 420, 370, 0)
